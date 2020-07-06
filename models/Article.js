@@ -9,7 +9,8 @@ var ArticleSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   //SUMMARY
   summary: {
@@ -19,14 +20,15 @@ var ArticleSchema = new Schema({
   // `URL` is required and of type String
   link: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   // `comment` is an object that stores a COMMENT id
   // The ref property links the ObjectId to the COMMENT model
   // This allows us to populate the Article with an associated COMMENT
   comment: {
     type: Schema.Types.ObjectId,
-    ref: " Comment"
+    ref: "Comment"
   }
 });
 
