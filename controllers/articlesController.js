@@ -55,8 +55,6 @@ router.get("/articles", function (req, res) {
 
 // Route for grabbing a specific Article by id, populate it with it's comment
 router.get("/articles/:id", function (req, res) {
-    // TODO
-    // ====
     db.Article.findOne({ where: { id: req.params.id } })
         .populate("comment")
         .then(function (dbArticles) {

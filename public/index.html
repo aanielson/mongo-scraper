@@ -4,48 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bootstrap Link-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>News Scraper</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Mongo Scraper</a>
-        <ul>
-            <li class="nav-item active"><a href="#">Home</a></li>
-            <li class="nav-item"><a href="#">Saved Articles</a></li>
-            <li class="nav-item"><a href="#" class="scrape-new">Scrape New Articles</a></li>
-            <li class="nav-item"><a href="#" class="clear">Clear Articles</a></li>
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="scrapeNew">Scrape New Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Clear Articles</a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="jumbotron text-center">
         <div class="overlay"></div>
         <div class="background-image"></div>
         <div class="caption">
             <h1>Mongo Scraper</h1>
-            <p>Washington Post Edition</p>
+            <p>Deseret News Edition</p>
         </div>
     </div>
     <div class="container-fluid article-container">
-        <div class="card">
+        <div id="articles mb-5">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <h3 class="float-left">
+                        <a class="article-link" target="_blank" rel="noopener noreferrer" href="#">Sample Title</a>
+                    </h3>
+                    <a class="btn btn-success save float-right">
+                        SAVE ARTICLE
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p>Sample Summary</p>
+                </div>
+            </div>
+        </div>
+        <div id="notes"></div>
+        <div class="card" id="comment-modal">
             <div class="card-header">
-                <h3>
-                    <a class="article-link" target="_blank" rel="noopener noreferrer" href="#">Sample Title</a>
-                </h3>
-                <a class="btn btn-success save">
-                    SAVE ARTICLE
-                </a>
+                <h2>Comment on an article</h2>
             </div>
             <div class="card-body">
-                <p>Sample summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum gravida nunc non
-                    tempus. Sed urna neque, lobortis vitae blandit quis, mattis sit amet mi. </p>
+                <form class="create-form devour-form" method="POST" action="/api/burgers">
+
+                    <div class="form-group">
+                        <label for="titleinput">Coment Title:</label>
+                        <input type="text" id="titleinput" name="titleinput">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bodyinput">Coment Body:</label>
+                        <input type="text" id="bodyinput" name="bodyinput">
+                    </div>
+
+                    <button type="submit">Comment</button>
+                </form>
             </div>
+
         </div>
+
     </div>
-    <footer class="footer">
-        <div class="container text-center">
-            <p>Washington Post Mongo Scraper</p>
-        </div>
-    </footer>
+    <footer class="container-fluid text-center">
+        <p>Mongo Scraper</p>
+      </footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
