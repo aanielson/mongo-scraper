@@ -1,5 +1,6 @@
 var express = require("express");
 var mongoose = require("mongoose");
+
 var axios = require("axios");
 var cheerio = require("cheerio");
 
@@ -42,7 +43,7 @@ app.get("/scrape", function (req, res) {
         var $ = cheerio.load(response.data);
 
         // Now, we grab every h2 within an article tag, and do the following:
-        $("article").each(function (i, element) {
+        $("c-entry-box--compact--article").each(function (i, element) {
             // Save an empty result object
             var result = {};
 
@@ -53,6 +54,9 @@ app.get("/scrape", function (req, res) {
             result.link = $(this)
                 .children("a")
                 .attr("href");
+            result.image = $(this)
+                .children("img")
+                .attr("src")
 
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
@@ -75,6 +79,7 @@ app.get("/scrape", function (req, res) {
 app.get("/articles", function (req, res) {
     // TODO: Finish the route so it grabs all of the articles
     db.Article.find({})
+        .lean()
         .then(function (dbArticles) {
             // View the added result in the console
             console.log(dbArticles);

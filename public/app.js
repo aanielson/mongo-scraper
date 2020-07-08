@@ -1,9 +1,9 @@
-const { $where } = require("../models/Saved");
-
 var articleId;
 var articleTitle;
 var articleLink;
 var articleSummary;
+
+getArticles();
 
 //when "Scrape new articles" button is clicked, the display pulls articles in
 // <10 articles
