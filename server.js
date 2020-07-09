@@ -1,3 +1,12 @@
+// const Handlebars = require('handlebars');
+// const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+// //NOTE: expressHandlebars is the express-handlebars node package
+// app.engine('handlebars', expressHandlebars({
+//     //IMPORTANT
+//     handlebars: allowInsecurePrototypeAccess(Handlebars)
+//     //Other config goes here
+// }));
+
 var express = require("express");
 var mongoose = require("mongoose");
 
@@ -23,10 +32,10 @@ app.use(express.static("public"));
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI);
 
-// Set Handlebars....
-var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// // Set Handlebars....
+// var exphbs = require("express-handlebars");
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 //for the controller and handlebars usage
@@ -43,7 +52,7 @@ app.get("/scrape", function (req, res) {
         var $ = cheerio.load(response.data);
 
         // Now, we grab every h2 within an article tag, and do the following:
-        $("c-entry-box--compact--article").each(function (i, element) {
+        $("h2").each(function (i, element) {
             // Save an empty result object
             var result = {};
 
@@ -54,10 +63,13 @@ app.get("/scrape", function (req, res) {
             result.link = $(this)
                 .children("a")
                 .attr("href");
-            result.image = $(this)
-                .children("img")
-                .attr("src")
-
+            if (!result.title) {
+                result.title = "Article title not available";
+            }
+            if (!result.link) {
+                result.link = "Link Not Available";
+            }
+            console.log(result);
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
                 .then(function (dbArticle) {
@@ -78,11 +90,12 @@ app.get("/scrape", function (req, res) {
 // Route for getting all Articles from the db
 app.get("/articles", function (req, res) {
     // TODO: Finish the route so it grabs all of the articles
+    console.log("articles route goes")
     db.Article.find({})
         .lean()
         .then(function (dbArticles) {
             // View the added result in the console
-            console.log(dbArticles);
+            res.json(dbArticles);
         })
         .catch(function (err) {
             // If an error occurred, log it

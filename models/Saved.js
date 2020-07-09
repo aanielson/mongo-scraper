@@ -12,11 +12,7 @@ var SavedSchema = new Schema({
         required: true,
         unique: true
     },
-    class: {
-        type: String,
-        required: true
-    },
-    note: {
+    comment: {
         type: String
     }
 });

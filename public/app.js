@@ -1,7 +1,6 @@
 var articleId;
 var articleTitle;
 var articleLink;
-var articleSummary;
 
 getArticles();
 
@@ -19,11 +18,13 @@ $(document).on("click", "#scrapeNew", function () {
 
 function getArticles() {
   $.getJSON("/articles", function (data) {
+    console.log(data);
+    // $("#articles").append("<p>Accessing Articles ID</p>");
+    
     for (var i = 0; i < 10; i++) {
       articleId = data[i]._id;
       articleTitle = data[i].title;
       articleLink = data[i].link;
-      articleSummary = data[i].summary;
 
       // Display the apropos information on the page as a card
       //each display is a card
@@ -48,16 +49,9 @@ function getArticles() {
       $(saveButton).text("SAVE ARTICLE")
       $(articleCardHead).append(articleHeadline, saveButton);
 
-      //create a card-body within each article card and append it with the article summary
-      var articleCardBody = $("div");
-      $(articleCardBody).attr("class", "card-body");
-      var articleCardSummary = $("<p>");
-      $(articleCardSummary).text(articleSummary);
-      $(articleCardBody).append(articleCardSummary);
-
       //append both the card-header and card-body to the full article div
-      $(articleCardDiv).append(articleCardHead, articleCardBody);
-
+      $(articleCardDiv).append(articleCardHead);
+      console.log(articleCardDiv);
       //append the #articles display with each new article card
       $("#articles").append(articleCardDiv);
     }
