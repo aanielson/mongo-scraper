@@ -18,13 +18,18 @@ var ArticleSchema = new Schema({
     required: true,
     unique: true
   },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+  // image: {
+  //   type: String,
+  //   required: true,
+  //   unique: true
+  // },
   // `comment` is an object that stores a COMMENT id
   // The ref property links the ObjectId to the COMMENT model
   // This allows us to populate the Article with an associated COMMENT
-  comment: {
-    type: Schema.Types.ObjectId,
-    ref: "Comment"
-  }
 });
 
 // This creates our model from the above schema, using mongoose's model method

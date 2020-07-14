@@ -2,18 +2,14 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var SavedSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    link: {
+    savedId: {
         type: String,
         required: true,
         unique: true
     },
     comment: {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
     }
 });
 

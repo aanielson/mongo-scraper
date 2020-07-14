@@ -7,6 +7,7 @@ getArticles();
 //when "Scrape new articles" button is clicked, the display pulls articles in
 // <10 articles
 $(document).on("click", "#scrapeNew", function () {
+  //should I add an ajax "DELETE"?
   $.ajax({
     method: "GET",
     url: "/scrape"
@@ -33,7 +34,7 @@ function getArticles() {
 
       //create a card div for each article
       var articleCardDiv = $("<div>");
-      $(articleCardDiv).attr("id", articleId);
+      
       $(articleCardDiv).attr("class", "card mb-2");
 
       //create a card-header div within each article card  
@@ -46,6 +47,9 @@ function getArticles() {
       $(linkedHeadline).text(articleTitle);
       $(articleHeadline).append(linkedHeadline);
       var saveButton = $("<a class='btn btn-success save float-right'>");
+      $(saveButton).attr("id", articleId);
+      $(saveButton).attr("data-title", articleTitle);
+      $(saveButton).attr("data-link", articleLink);
       $(saveButton).text("SAVE ARTICLE")
       $(articleCardHead).append(articleHeadline, saveButton);
 
@@ -57,6 +61,26 @@ function getArticles() {
     }
   });
 };
+
+$(document).on("click", ".save", function () {
+  //take the id and use it in a put
+  articleTitle = $(this).attr("data-title");
+  articleLink = $(this).attr("data-link");
+  console.log(articleId);
+  console.log(articleTitle);
+  console.log(articleLink);
+  //
+  $.ajax({
+    method: "POST",
+    url: "/saved-articles",
+    data: {
+      articleTitle,
+      articleLink
+    }
+  }).then(function (res) {
+    console.log(res);
+  });
+});
 
 
 //when "clear articles" button is clicked, the display is empltied and replaced with two buttons

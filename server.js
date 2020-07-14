@@ -30,7 +30,7 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI), { useNewUrlParser: true };
 
 // // Set Handlebars....
 // var exphbs = require("express-handlebars");
@@ -57,12 +57,17 @@ app.get("/scrape", function (req, res) {
             var result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
-            result.title = $(this)
+            result.title = $(this)  
                 .children("a")
                 .text();
             result.link = $(this)
                 .children("a")
                 .attr("href");
+            // result.image= $(this)
+            //     .children("a")
+            //     .children("div")
+            //     .children("img")
+            //     .attr("src");
             if (!result.title) {
                 result.title = "Article title not available";
             }
@@ -92,6 +97,7 @@ app.get("/articles", function (req, res) {
     // TODO: Finish the route so it grabs all of the articles
     console.log("articles route goes")
     db.Article.find({})
+        .sort("-date")
         .lean()
         .then(function (dbArticles) {
             // View the added result in the console
@@ -105,7 +111,7 @@ app.get("/articles", function (req, res) {
 
 // Route for grabbing a specific Article by id, populate it with it's COMMENT
 app.get("/articles/:id", function (req, res) {
-    db.Article.findOne({ where: { id: req.params.id } })
+    db.Saved.findOne({ where: { id: req.params.id } })
         .populate("comment")
         .then(function (dbArticles) {
             res.json(dbArticles);
@@ -122,7 +128,7 @@ app.post("/articles/:id", function (req, res) {
     db.Comment.create(req.body)
         // then find an article from the req.params.id
         .then(function (dbComment) {
-            return db.Article.findOneAndUpdate({}, { $push: { comment: dbComment._id } }, { new: true });
+            return db.Saved.findOneAndUpdate({}, { $push: { comment: dbComment._id } }, { new: true });
         })
         .then(function (dbArticle) {
             // If the Article was updated successfully, send it back to the client
@@ -156,6 +162,7 @@ app.get("/saved-articles/:id", function(req, res) {
     });
 });
 
+//creating a new saved article with data from the scraped articles
 app.post("/saved-articles", function(req, res) {
     db.Saved.create(req.body)
         .then(function(dbSaved) {
@@ -166,6 +173,7 @@ app.post("/saved-articles", function(req, res) {
         });
 });
 
+//updating a comment?
 app.post("/saved-articles/:id", function(req, res) {
     if(req.body.delete) {
         db.Saved.deleteOne({ _id: req.params.id })
@@ -178,7 +186,7 @@ app.post("/saved-articles/:id", function(req, res) {
     } else {
         db.Saved.findOneAndUpdate(
             { _id: req.params.id },
-            { note: req.body.note },
+            { comment: req.body.note },
             { new: false }
         )
         .then(function (dbArticle) {

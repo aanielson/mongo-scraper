@@ -7,7 +7,6 @@
     <!--Bootstrap Link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <title>News Scraper</title>
 </head>
 
@@ -22,14 +21,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/scrape">Scrape New Articles</a>
+                    <a class="nav-link" href="/saved.html" id="savedNews">Saved </span></a>
                 </li>
-                {{!-- <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link" href="/scrape" id="scrapeNew">Scrape New Articles</a>
+                </li>
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Clear Articles</a>
-                </li> --}}
+                </li> -->
             </ul>
         </div>
     </nav>
@@ -39,18 +41,37 @@
         <div class="caption">
             <h1>Mongo Scraper</h1>
             <p>Deseret News Edition</p>
+
         </div>
     </div>
-    {{body}}
-    <footer class="footer">
-        <div class="container text-center">
-            <p>Deseret News Mongo Scraper</p>
+    <div class="container-fluid article-container">
+        <h2>Saved Notes</h2>
+        <div id="articles"></div>
+        <div class="modal fade" role="dialog" id="myComment">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>New Comment</h5>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id='bodyinput' name='body'></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-id='" + data._id + "' id='savenote' data-dismiss="modal">Save Comment</button>
+                        <button type="button" class="btn" id="modal-button" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+    </div>
+    <footer class="container-fluid text-center">
+        <p>Mongo Scraper</p>
     </footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-<script src="/app.js"></script>
+<script src="/saved.js"></script>
 
 </html>
