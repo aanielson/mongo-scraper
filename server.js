@@ -111,7 +111,7 @@ app.get("/articles", function (req, res) {
 
 // Route for grabbing a specific Article by id, populate it with it's COMMENT
 app.get("/articles/:id", function (req, res) {
-    db.Saved.findOne({ where: { id: req.params.id } })
+    db.Saved.findOne({ where: { _id: req.params.id } })
         .populate("comment")
         .then(function (dbArticles) {
             res.json(dbArticles);
@@ -122,13 +122,13 @@ app.get("/articles/:id", function (req, res) {
         });
 });
 
-// Route for saving/updating an Article's associated COMMENT
+// Route for creating a new an Article's associated COMMENT
 app.post("/articles/:id", function (req, res) {
     // save the new comment that gets posted to the COMMENT collection
     db.Comment.create(req.body)
         // then find an article from the req.params.id
         .then(function (dbComment) {
-            return db.Saved.findOneAndUpdate({}, { $push: { comment: dbComment._id } }, { new: true });
+            return db.Saved.findOneAndUpdate({_id: req.params.id}, { $push: { comment: dbComment._id } }, { new: true });
         })
         .then(function (dbArticle) {
             // If the Article was updated successfully, send it back to the client

@@ -38,14 +38,15 @@ function getSaved() {
         //Create display for comments
         var articleCardBody = $("<div class='card-body text-center'>");
         $(articleCardBody).attr("id", "card-body-" + articleId);
-        var commentForm = $("<textarea id='bodyinput' name='body' class='mt-2'>");
+        var commentForm = $("<textarea id='bodyinput-" + articleId + "' name='body' class='mt-2'>");
         //comment button and delete button
-        var commentButton = $("<br><a class='btn btn-success articleComment'>");
+        
+        var commentButton = $("<a class='btn btn-success articleComment'>");
         $(commentButton).attr("id", articleId);
         $(commentButton).attr("data-title", articleTitle);
         $(commentButton).attr("data-link", articleLink);
         $(commentButton).text("NEW COMMENT");
-        $(articleCardBody).append(commentForm, commentButton);
+        $(articleCardBody).append(commentForm, "<br>", commentButton);
         
         //create footer for delete button
         var articleCardFooter = $("<div class='card-footer text-center'>");
@@ -76,14 +77,16 @@ function getSaved() {
 //if display is empty, show "Looks like you haven't saved any articles" with a link back the the home tab to "browse articles"
 
 //create comment in Saved collection then prepend the card body of the associated saved article
-$(document).on("click", "#articleComment", function () {
+$(document).on("click", ".articleComment", function () {
     //take the id and use it in a put
     var savedId = $(this).attr("id");
     articleTitle = $(this).attr("data-title");
     articleLink = $(this).attr("data-link");
-    var commentBody = $("#bodyinput").val();
+    var commentBody = $("#bodyinput-" + savedId).val();
+    console.log(savedId);
     console.log(articleTitle);
     console.log(articleLink);
+    console.log(commentBody);
     //
     $.ajax({
         method: "POST",
@@ -93,7 +96,7 @@ $(document).on("click", "#articleComment", function () {
             // articleTitle,
             // articleLink,
             // savedId
-            commentBody
+            body: commentBody
         }
     }).then(function (res) {
         console.log(res);
