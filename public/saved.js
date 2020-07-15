@@ -10,7 +10,7 @@ function getSaved() {
     $.getJSON("/saved-articles", function (data) {
       console.log(data);
 
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < data.length; i++) {
         articleId = data[i]._id;
         articleTitle = data[i].articleTitle;
         articleLink = data[i].articleLink;
@@ -98,12 +98,13 @@ $(document).on("click", "#articleComment", function () {
     }).then(function (res) {
         console.log(res);
         //prepend the "card-body-" + savedId div with each new comment
-        $.ajax({
-
-        }).then(function(res) {
-            var commentDisplay = $("#card-body" + savedId);
-            $(commentDisplay).prepend(res + "<br>");
-        })
+        // $.ajax({
+        //     method: "GET",
+        //     url: ""
+        // }).then(function(res) {
+        //     var commentDisplay = $("#card-body" + savedId);
+        //     $(commentDisplay).prepend(res + "<br>");
+        // })
         
     });
 });

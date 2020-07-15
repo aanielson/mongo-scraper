@@ -2,7 +2,12 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var SavedSchema = new Schema({
-    savedId: {
+    articleTitle: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    articleLink: {
         type: String,
         required: true,
         unique: true

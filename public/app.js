@@ -66,7 +66,7 @@ $(document).on("click", ".save", function () {
   //take the id and use it in a put
   articleTitle = $(this).attr("data-title");
   articleLink = $(this).attr("data-link");
-  console.log(articleId);
+  // console.log(articleId);
   console.log(articleTitle);
   console.log(articleLink);
   //
@@ -74,8 +74,8 @@ $(document).on("click", ".save", function () {
     method: "POST",
     url: "/saved-articles",
     data: {
-      articleTitle,
-      articleLink
+      articleTitle: articleTitle,
+      articleLink: articleLink
     }
   }).then(function (res) {
     console.log(res);
