@@ -38,6 +38,14 @@ function getSaved() {
         //Create display for comments
         var articleCardBody = $("<div class='card-body text-center'>");
         $(articleCardBody).attr("id", "card-body-" + articleId);
+          //for loop displaying all comments
+          console.log(data[i]);
+          if(data[i].comment){
+            for (var x = 0; x < data[i].comment.length; x++) {
+              var newComment = data[i].comment[x];
+              $(articleCardBody).prepend(newComment);
+            }
+          }
         var commentForm = $("<textarea id='bodyinput-" + articleId + "' name='body' class='mt-2'>");
         //comment button and delete button
         
@@ -46,7 +54,7 @@ function getSaved() {
         $(commentButton).attr("data-title", articleTitle);
         $(commentButton).attr("data-link", articleLink);
         $(commentButton).text("NEW COMMENT");
-        $(articleCardBody).append(commentForm, "<br>", commentButton);
+        $(articleCardBody).append("<br>", commentForm, "<br>", commentButton);
         
         //create footer for delete button
         var articleCardFooter = $("<div class='card-footer text-center'>");
@@ -99,16 +107,7 @@ $(document).on("click", ".articleComment", function () {
             body: commentBody
         }
     }).then(function (res) {
-        console.log(res);
-        //prepend the "card-body-" + savedId div with each new comment
-        // $.ajax({
-        //     method: "GET",
-        //     url: ""
-        // }).then(function(res) {
-        //     var commentDisplay = $("#card-body" + savedId);
-        //     $(commentDisplay).prepend(res + "<br>");
-        // })
-        
+        console.log(res);        
     });
 });
 
