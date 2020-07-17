@@ -143,7 +143,7 @@ app.post("/articles/:id", function (req, res) {
 
 app.get("/saved-articles", function(req, res) {
     db.Saved.find({})
-        .populate("Comment")
+    .populate('comment')
         .then(function (dbSaved) {
             res.json(dbSaved);
         })

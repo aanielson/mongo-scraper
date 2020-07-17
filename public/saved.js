@@ -42,8 +42,8 @@ function getSaved() {
           console.log(data[i]);
           if(data[i].comment){
             for (var x = 0; x < data[i].comment.length; x++) {
-              var newComment = data[i].comment[x];
-              $(articleCardBody).prepend(newComment);
+              var newComment = data[i].comment[x].body;
+              $(articleCardBody).prepend(newComment, "<br>");
             }
           }
         var commentForm = $("<textarea id='bodyinput-" + articleId + "' name='body' class='mt-2'>");
