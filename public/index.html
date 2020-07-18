@@ -7,21 +7,17 @@
     <!--Bootstrap Link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>News Scraper</title>
+    <!--Local CSS-->
+    <link rel="stylesheet" href="/syle.css">
+        <title>News Scraper</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="/">Mongo Scraper</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="nav navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/saved.html" id="savedNews">Saved </span></a>
@@ -29,9 +25,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/" id="scrapeNew">Scrape New Articles</a>
                 </li>
-                
             </ul>
-        </div>
     </nav>
     <div class="jumbotron text-center">
         <div class="overlay"></div>
@@ -43,32 +37,8 @@
     </div>
     <div class="container-fluid article-container">
         <div id="articles"></div>
-        <div id="notes"></div>
-        <div class="card" id="comment-modal">
-            <div class="card-header">
-                <h2>Comment on an article</h2>
-            </div>
-            <div class="card-body">
-                <form class="create-form devour-form" method="POST" action="/api/burgers">
-
-                    <div class="form-group">
-                        <label for="titleinput">Coment Title:</label>
-                        <input type="text" id="titleinput" name="titleinput">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bodyinput">Coment Body:</label>
-                        <input type="text" id="bodyinput" name="bodyinput">
-                    </div>
-
-                    <button type="submit">Comment</button>
-                </form>
-            </div>
-
-        </div>
-
     </div>
-    <footer class="container-fluid text-center">
+    <footer class="footer">
         <p>Mongo Scraper</p>
       </footer>
 </body>

@@ -7,7 +7,6 @@ getArticles();
 //when "Scrape new articles" button is clicked, the display pulls articles in
 // <10 articles
 $(document).on("click", "#scrapeNew", function () {
-  //should I add an ajax "DELETE"?
   $.ajax({
     method: "GET",
     url: "/scrape"
@@ -46,7 +45,7 @@ function getArticles() {
       var linkedHeadline = $("<a href=" + articleLink + ">")
       $(linkedHeadline).text(articleTitle);
       $(articleHeadline).append(linkedHeadline);
-      var saveButton = $("<a class='btn btn-success save float-right'>");
+      var saveButton = $("<a class='btn save float-right'>");
       $(saveButton).attr("id", articleId);
       $(saveButton).attr("data-title", articleTitle);
       $(saveButton).attr("data-link", articleLink);

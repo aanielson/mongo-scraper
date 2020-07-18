@@ -1,0 +1,47 @@
+.jumbotron {
+    background-color: #F9A825;
+    border-bottom: solid 1px dimgray;
+}
+.card-header {
+    background-color: #FBC02D;
+}
+.card-body {
+    background-color: #FFF59d;
+}
+.card {
+    box-shadow: 1px 1px 1px dimgray;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #F57F17;
+    color: #fff9c4;
+    text-align: center;
+    padding-top: 20px;
+    border-top: solid 1px dimgray;
+}
+.navbar {
+    background-color: #F57F17;
+}
+.btn {
+    background-color: #F9A825;
+    box-shadow: 1px 1px 1px dimgray;
+}
+#articles {
+    margin-bottom: 100px;
+}
+
+a:link {
+    color: #fff9c4;
+}
+a:visited {
+    color: #fff9c4;
+}
+a:hover {
+    color: grey;
+}
+body {
+    background-color: #fff9c4;
+}

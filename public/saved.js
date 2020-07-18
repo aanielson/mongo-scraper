@@ -49,7 +49,7 @@ function getSaved() {
         var commentForm = $("<textarea id='bodyinput-" + articleId + "' name='body' class='mt-2'>");
         //comment button and delete button
         
-        var commentButton = $("<a class='btn btn-success articleComment'>");
+        var commentButton = $("<a class='btn articleComment'>");
         $(commentButton).attr("id", articleId);
         $(commentButton).attr("data-title", articleTitle);
         $(commentButton).attr("data-link", articleLink);
@@ -57,17 +57,17 @@ function getSaved() {
         $(articleCardBody).append("<br>", commentForm, "<br>", commentButton);
         
         //create footer for delete button
-        var articleCardFooter = $("<div class='card-footer text-center'>");
-        var deleteButton = $("<a class='btn btn-danger deleteSaved ml-1'>");
-        $(deleteButton).attr("id", articleId);
-        $(deleteButton).attr("data-title", articleTitle);
-        $(deleteButton).attr("data-link", articleLink);
-        $(deleteButton).text("DELETE FROM SAVED");
-        //append footer with delete button
-        $(articleCardFooter).append(deleteButton);
+        // var articleCardFooter = $("<div class='card-footer text-center'>");
+        // var deleteButton = $("<a class='btn btn-danger deleteSaved ml-1'>");
+        // $(deleteButton).attr("id", articleId);
+        // $(deleteButton).attr("data-title", articleTitle);
+        // $(deleteButton).attr("data-link", articleLink);
+        // $(deleteButton).text("DELETE FROM SAVED");
+        // //append footer with delete button
+        // $(articleCardFooter).append(deleteButton);
 
         //append both the card-header and card-body to the full article div
-        $(articleCardDiv).append(articleCardHead, articleCardBody, articleCardFooter);
+        $(articleCardDiv).append(articleCardHead, articleCardBody);
         console.log(articleCardDiv);
         //append the #articles display with each new article card
         $("#articles").append(articleCardDiv);

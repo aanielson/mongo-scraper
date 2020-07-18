@@ -7,45 +7,34 @@
     <!--Bootstrap Link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--Local CSS-->
+    <link rel="stylesheet" href="/syle.css">
     <title>News Scraper</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="/">Mongo Scraper</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/saved.html" id="savedNews">Saved </span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/scrape" id="scrapeNew">Scrape New Articles</a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Clear Articles</a>
-                </li> -->
-            </ul>
-        </div>
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/saved.html" id="savedNews">Saved </span></a>
+            </li>
+        </ul>
     </nav>
+
     <div class="jumbotron text-center">
         <div class="overlay"></div>
         <div class="background-image"></div>
         <div class="caption">
             <h1>Mongo Scraper</h1>
-            <p>Deseret News Edition</p>
+            <p>Saved Articles</p>
 
         </div>
     </div>
     <div class="container-fluid article-container">
-        <h2>Saved Articles</h2>
         <div id="articles"></div>
         <div class="modal fade" role="dialog" id="myComment">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -65,7 +54,7 @@
         </div>
 
     </div>
-    <footer class="container-fluid text-center">
+    <footer class="footer">
         <p>Mongo Scraper</p>
     </footer>
 </body>
